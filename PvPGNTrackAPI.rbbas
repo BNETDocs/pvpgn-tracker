@@ -68,11 +68,15 @@ Inherits HTTPSecureSocket
 		    stderr.WriteLine( "Sending solicit request to api..." )
 		  End If
 		  
-		  Me.SendRequest( "POST", "http://utility:6114/solicit" )
+		  Me.SendRequest( "POST", "http://127.0.0.1:6114/solicit" )
 		  
 		End Sub
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h0
+		Endpoint As String
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		Verbose As Boolean
