@@ -61,7 +61,7 @@ Inherits HTTPSecureSocket
 		  
 		  Me.ClearRequestHeaders()
 		  
-		  Me.requestHeaders.SetHeader( "User-Agent", "PvPGNTrack/" + Format( App.MajorVersion, "-#" ) + "." + Format( App.MinorVersion, "-#" ))
+		  Me.requestHeaders.SetHeader( "User-Agent", App.ProjectName() + "/" + App.VersionString() )
 		  
 		  Me.SetRequestContent( formString, "application/json;charset=utf-8" )
 		  
