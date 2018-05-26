@@ -14,7 +14,7 @@ Inherits HTTPSecureSocket
 		  Me.ConnectionType = Me.TLSv1
 		  Me.DefaultPort = 443
 		  Me.Endpoint = "http://127.0.0.1:6114/solicit"
-		  Me.Secure = True
+		  Me.Secure = False
 		  Me.Yield = True
 		  
 		End Sub
@@ -68,6 +68,8 @@ Inherits HTTPSecureSocket
 		  If Me.Verbose Then
 		    stderr.WriteLine( "Sending solicit request to api..." )
 		  End If
+		  
+		  Me.Secure = ( Left( Me.Endpoint, 8 ) = "https://" )
 		  
 		  Me.SendRequest( "POST", Me.Endpoint )
 		  
