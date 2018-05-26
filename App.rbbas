@@ -96,6 +96,8 @@ Inherits ConsoleApplication
 		      stdout.WriteLine( "-p, -port           Set the udp port to bind to." )
 		      stdout.WriteLine( "-v, -verbose        Set verbose mode." )
 		      
+		      Me.ExitLoop = True
+		      
 		    Case "i", "if", "interface"
 		      Me.Tracker.NetworkInterface = App.GetNetworkInterface( argValue )
 		      
