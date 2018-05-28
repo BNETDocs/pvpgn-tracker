@@ -21,7 +21,7 @@ Inherits HTTPSecureSocket
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Solicit(Message As TrackerMessage)
+		Sub Solicit(Message As TrackerMessage, MessageIPAddress As String)
 		  
 		  Dim messageTree As New JSONItem()
 		  
@@ -36,6 +36,7 @@ Inherits HTTPSecureSocket
 		  Dim n_contactName As String = Message.ContactName
 		  Dim n_contactEmail As String = Message.ContactEmail
 		  
+		  messageTree.Value( "server_address" ) = MessageIPAddress
 		  messageTree.Value( "server_port" ) = Message.ServerPort
 		  messageTree.Value( "flags" ) = Message.Flags
 		  messageTree.Value( "software" ) = n_software

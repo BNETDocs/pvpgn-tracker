@@ -54,7 +54,7 @@ Inherits UDPListener
 		  stdout.WriteLine( "          Uptime: " + App.TimeString( msg.Uptime ) + " (" + Format( msg.Uptime, "-#" ) + ")" )
 		  stdout.WriteLine( " -- End -- " )
 		  
-		  App.TrackAPI.Solicit( msg )
+		  App.TrackAPI.Solicit( msg, Data.Address )
 		  
 		End Sub
 	#tag EndEvent
