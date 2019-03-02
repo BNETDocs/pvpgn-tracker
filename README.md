@@ -1,5 +1,3 @@
 # pvpgn-tracker
-A daemon to transform PvPGN solicit requests over UDP to HTTP API calls.
-
-The HTTP API service can be found at
-[pvpgn-tracker-web](https://github.com/BNETDocs/pvpgn-tracker-web).
+This project transforms PvPGN tracker solicitations over UDP datagrams into
+usable data for users to browse using a PHP web server.
