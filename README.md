@@ -14,6 +14,9 @@ The PHP web user interface requires Nginx and PHP-FPM software, and the
 environment needs to be able to access the daemon's state file for reading. All
 requests should be sent to the [main.php](/web/src/main.php) file.
 
+For information on the format of the UDP datagram, read the [PvPGN Tracking
+Protocol](https://bnetdocs.org/document/35/pvpgn-tracking-protocol) document.
+
 ## License &amp; Warranty
 See our [License](/LICENSE.txt) file included with this repository.
 
