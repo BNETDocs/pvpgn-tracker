@@ -2,7 +2,6 @@
 
 import argparse
 import json
-import md5
 import socket
 import struct
 import time
@@ -109,10 +108,7 @@ def parse_datagram(data, addr):
     return dataobj
 
 def get_solicitation_id(ip_address, port):
-    m = md5.new()
-    m.update(ip_address)
-    m.update(str(port))
-    return m.hexdigest()
+    return (ip_address + str(port))
 
 def handle_solicitation(data, state):
     solicitation_id = get_solicitation_id(data['ip_address'], data['port'])
