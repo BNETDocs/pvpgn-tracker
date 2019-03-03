@@ -108,7 +108,7 @@ def parse_datagram(data, addr):
     return dataobj
 
 def get_solicitation_id(ip_address, port):
-    return (ip_address + ":" + str(port))
+    return ("%s:%i" % (ip_address, port))
 
 def handle_solicitation(data, state):
     solicitation_id = get_solicitation_id(data['ip_address'], data['port'])
