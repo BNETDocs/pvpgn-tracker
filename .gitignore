@@ -11,10 +11,11 @@
 *.jar
 *.log
 *.patch
+*.pyc
 *.rar
-*.rbuistate
 *.swp
 *.tar
+*.tgz
 *.vi
 *.vim
 *.zip
@@ -22,7 +23,6 @@
 .Spotlight-V100
 .Trashes
 ._*
-Builds - pvpgn-tracker.rbvcp/
 Desktop.ini
 Thumbs.db
-bin/
+composer.phar
