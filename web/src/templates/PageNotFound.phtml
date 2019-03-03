@@ -1,0 +1,9 @@
+<?php namespace PvPGNTracker\Templates; $title = 'Not Found'; ?>
+<?php $nav = true; require( './header.inc.phtml' ); ?>
+
+<div class="alert alert-danger" role="alert" style="margin-top:15px;">
+  <h4 class="alert-heading"><?=$title?></h4>
+  <p class="mb-0">The requested resource could not be found.</p>
+</div>
+
+<?php require( './footer.inc.phtml' ); ?>

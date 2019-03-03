@@ -1,0 +1,16 @@
+<?php namespace PvPGNTracker\Templates; $title = 'Soft Redirect'; ?>
+<?php $nav = true; require( './header.inc.phtml' ); ?>
+
+<div class="alert alert-warning" role="alert" style="margin-top:15px;">
+  <h4 class="alert-heading"><?=$title?></h4>
+  <p class="mb-0">
+    Location has moved, please follow this link:<br/>
+    <a href="<?=$this->getContext()->location?>">
+      <?=filter_var(
+        $this->getContext()->location, FILTER_SANITIZE_FULL_SPECIAL_CHARS
+      )?>
+    </a>
+  </p>
+</div>
+
+<?php require( './footer.inc.phtml' ); ?>

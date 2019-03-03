@@ -1,0 +1,47 @@
+{
+    "name": "carlbennett/pvpgn-track",
+    "description": "A PvPGN Tracker Suite",
+    "type": "project",
+    "keywords": [
+        "pvpgn",
+        "tracker",
+        "track",
+        "telemetry",
+        "diablo",
+        "starcraft",
+        "warcraft"
+    ],
+    "homepage": "https://github.com/BNETDocs/pvpgn-tracker-web",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carl Bennett",
+            "email": "carl@carlbennett.me"
+        }
+    ],
+    "config": {
+        "vendor-dir": "lib"
+    },
+    "autoload": {
+        "psr-4": {
+            "PvPGNTracker\\Controllers\\": "src/controllers",
+            "PvPGNTracker\\Libraries\\": "src/libraries",
+            "PvPGNTracker\\Models\\": "src/models",
+            "PvPGNTracker\\Templates\\": "src/templates",
+            "PvPGNTracker\\Views\\": "src/views"
+        }
+    },
+    "require": {
+        "carlbennett/php-mvc": "~2",
+        "ext-curl": "*",
+        "ext-geoip": "*",
+        "ext-gmp": "*",
+        "ext-http": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-mcrypt": "*",
+        "ext-memcached": "*",
+        "ext-pdo": "*",
+        "php-64bit": ">=5.5.0"
+    }
+}

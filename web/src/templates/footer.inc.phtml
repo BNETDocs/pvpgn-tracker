@@ -1,0 +1,23 @@
+<?php namespace PvPGNTracker\Templates;
+use \PvPGNTracker\Libraries\VersionInfo; ?>
+    </main>
+    <footer class="footer bg-dark">
+      <div class="container">
+        <p class="text-muted mb-0">
+          Developed with <img alt="love" title="love" src="/heart.png" style="height:16px;"/> at
+<?php if ( VersionInfo::$version->pvpgntracker ) { ?>
+          <a href="https://github.com/BNETDocs/pvpgn-tracker-web/tree/<?=VersionInfo::$version->pvpgntracker[1]?>" rel="external" title="Contribute to the source code!">pvpgn-tracker-web</a> (<?=VersionInfo::$version->pvpgntracker[0]?>)
+<?php } else { ?>
+          <a href="https://github.com/BNETDocs/pvpgn-tracker-web">pvpgn-tracker-web</a> (Development)
+<?php } ?>
+        </p>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="/js/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"><![CDATA[]]></script>
+    <script type="text/javascript" src="/js/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"><![CDATA[]]></script>
+    <script type="text/javascript" src="/js/jquery.dataTables.min.js" charset="utf8"><![CDATA[]]></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"><![CDATA[]]></script>
+
+  </body>
+</html>

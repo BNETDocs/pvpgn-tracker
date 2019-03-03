@@ -1,0 +1,53 @@
+<?php namespace PvPGNTracker\Templates; $title = 'Servers'; ?>
+<?php $nav = true; require( './header.inc.phtml' ); ?>
+
+<div class="container">
+
+  <h1><?=$title?></h1>
+  <p class="lead">These are the active servers that have been reporting in.</p>
+
+</div>
+
+<table id="servers" class="table table-hover table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Address</th>
+      <th scope="col">Location</th>
+      <th scope="col">Description</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Uptime</th>
+      <th scope="col">Software</th>
+      <th scope="col">Users</th>
+      <th scope="col">Games</th>
+    </tr>
+  </thead>
+  <tbody>
+<?php $rows = 0; foreach ( $this->getContext()->servers as $server ) { ++$rows; ?>
+    <tr>
+      <td><?=$server[ 'address' ]?></td>
+      <td><?=$server[ 'server_location' ]?></td>
+      <td><?=$server[ 'server_description' ]?></td>
+      <td><a href="mailto:<?=$server[ 'contact_email' ]?>"><?=$server[ 'contact_name' ]?></a></td>
+      <td><?=$server[ 'uptime' ]?></td>
+      <td><?=$server[ 'software' ]?></td>
+      <td><?=$server[ 'active_users' ]?></td>
+      <td><?=$server[ 'active_games' ]?></td>
+    </tr>
+<?php } ?>
+<?php if ( !$rows ) { ?>
+    <tr>
+      <td scope="row" colspan="8"><em>(no servers reporting.)</em></td>
+    </tr>
+<?php } else { ?>
+    <caption>Count: <?=$rows?></caption>
+<?php } ?>
+  </tbody>
+</table>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#servers').DataTable();
+    });
+  </script>
+
+<?php require( './footer.inc.phtml' ); ?>

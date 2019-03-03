@@ -1,0 +1,9 @@
+{
+    "maintenance": {
+        "enable": true,
+        "message": "Maintenance Mode. Try again later."
+    },
+    "tracker": {
+        "state_file": "/dev/shm/bntrackd.json"
+    }
+}

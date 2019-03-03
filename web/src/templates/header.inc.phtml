@@ -1,0 +1,55 @@
+<?php namespace PvPGNTracker\Templates;
+use \CarlBennett\MVC\Libraries\Common;
+$nav_current = parse_url( getenv( 'REQUEST_URI' ), PHP_URL_PATH ); ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title><?=$title?> &ndash; pvpgn-tracker</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/main.css"/>
+<?php foreach ( $this->additional_css as $path ) { ?>
+    <link rel="stylesheet" type="text/css" media="all" href="<?=Common::relativeUrlToAbsolute( $path )?>"/>
+<?php } ?>
+
+    <meta name="keywords" content="pvpgn,tracker,track,telemetry,diablo,starcraft,warcraft"/>
+
+    <meta property="og:site_name" content="pvpgn-tracker"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="twitter:card" content="summary"/>
+    <meta property="og:title" content="<?=$title?>"/>
+    <meta property="twitter:title" content="<?=$title?>"/>
+
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">pvpgn-tracker</a>
+<?php if ( $nav ) { ?>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <!-- <?=$nav_current?> -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item <?php if ( $nav_current == '/search' ) { ?>active<?php } ?>">
+              <a class="nav-link" href="/search">Search<?php if ( $nav_current == '/search' ) { ?> <span class="sr-only">(current)</span><?php } ?></a>
+            </li>
+            <li class="nav-item <?php if ( $nav_current == '/servers' ) { ?>active<?php } ?>">
+              <a class="nav-link" href="/servers">Servers<?php if ( $nav_current == '/servers' ) { ?> <span class="sr-only">(current)</span><?php } ?></a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0" action="/search">
+            <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+<?php } ?>
+      </nav>
+    </header>
+    <main class="container" role="main">
