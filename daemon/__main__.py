@@ -72,14 +72,14 @@ def parse_datagram(data, addr):
 
     data_version, port, flags, software, version, platform, description, location, url, contact_name, contact_email, active_users, active_channels, active_games, uptime, total_games, total_logins = struct.unpack(fmt, data)
 
-    software = software.rstrip('\0')
-    version = version.rstrip('\0')
-    platform = platform.rstrip('\0')
-    description = description.rstrip('\0')
-    location = location.rstrip('\0')
-    url = url.rstrip('\0')
-    contact_name = contact_name.rstrip('\0')
-    contact_email = contact_email.rstrip('\0')
+    software = software.encode("utf-8", "replace").rstrip('\0')
+    version = version.encode("utf-8", "replace").rstrip('\0')
+    platform = platform.encode("utf-8", "replace").rstrip('\0')
+    description = description.encode("utf-8", "replace").rstrip('\0')
+    location = location.encode("utf-8", "replace").rstrip('\0')
+    url = url.encode("utf-8", "replace").rstrip('\0')
+    contact_name = contact_name.encode("utf-8", "replace").rstrip('\0')
+    contact_email = contact_email.encode("utf-8", "replace").rstrip('\0')
 
     dataobj = {
         "data_version": data_version,
