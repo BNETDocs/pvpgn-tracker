@@ -49,6 +49,7 @@
         if ( empty( $flag )) { $flag = 'pirate'; }
         $flag = array( Common::relativeUrlToAbsolute( '/images/flags/' . strtolower( $flag ) . '.png' ), strtoupper( $flag ));
         $location = trim( $location );
+        if ( empty( $location )) { $location = geoip_country_name_by_name( $server[ 'ip_address' ]); }
         ++$rows; ?>
     <tr>
       <td><address><?=$server[ 'ip_address' ]?>:<?=$server[ 'port' ]?></address></td>
