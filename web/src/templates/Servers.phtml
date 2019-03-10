@@ -26,12 +26,25 @@
 <?php const TF_SHUTDOWN = 0x00000001; const TF_PRIVATE = 0x00000002; ?>
 <?php $rows = 0; foreach ( $this->getContext()->servers as $server ) {
         if ( $server[ 'flags' ] & ( TF_SHUTDOWN | TF_PRIVATE ) >= ( TF_SHUTDOWN | TF_PRIVATE )) { continue; } // Delist these
+        if ( substr( $server[ 'url' ], 0, 8 ) == 'https://' ) {
+          $url = array(
+            filter_var( $server[ 'url' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
+            filter_var( substr( $server[ 'url' ], 8 ), FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
+          );
+        } else if ( substr( $server[ 'url' ], 0, 7 ) == 'http://' ) {
+          $url = array(
+            filter_var( $server[ 'url' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
+            filter_var( substr( $server[ 'url' ], 7 ), FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
+          );
+        } else {
+          $url = null;
+        }
         ++$rows; ?>
     <tr>
       <td><address><?=$server[ 'ip_address' ]?>:<?=$server[ 'port' ]?></address></td>
       <td><?=filter_var( $server[ 'location' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
       <td><?=filter_var( $server[ 'description' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
-      <td><a href="mailto:<?=filter_var( $server[ 'contact_email' ], FILTER_SANITIZE_EMAIL )?>"><?=filter_var( $server[ 'contact_name' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></a></td>
+      <td><a href="mailto:<?=filter_var( $server[ 'contact_email' ], FILTER_SANITIZE_EMAIL )?>"><?=filter_var( $server[ 'contact_name' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></a><br/><a href="<?=$url[ 0 ]?>"><?=$url[ 1 ]?></a></td>
       <td><?=(new UptimeConverter( $server[ 'uptime' ]))->__tostring()?></td>
       <td><?=filter_var( $server[ 'software' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?> (<?=filter_var( $server[ 'version' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?>)<br/><?=filter_var( $server[ 'platform' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
       <td><?=$server[ 'active_users' ]?> active<br/><?=$server[ 'total_logins' ]?> logins</td>
@@ -44,7 +57,7 @@
       <td scope="row" colspan="8"><em>(no servers reporting.)</em></td>
     </tr>
 <?php } else { ?>
-    <caption>Count: <?=$rows?></caption>
+    <tr><td colspan="9">Count: <?=$rows?></td></tr>
 <?php } ?>
   </tbody>
 </table>
