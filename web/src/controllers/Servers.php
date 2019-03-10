@@ -20,7 +20,7 @@ class Servers extends Controller {
 
             $model->servers = $bntrackd[ 'servers' ];
         } else {
-            $model->servers = null;
+            $model->servers = array();
         }
 
         $view->render( $model );
