@@ -32,17 +32,15 @@ class UptimeConverter {
         $years    = intdiv( $months, 12 );
         $months  %= 12;
 
-        $fmt = sprintf(
-            '%dy %dmo %dd %dh %dm %ds',
-            $years, $months, $days, $hours, $minutes, $seconds
-        );
+        $fmt = '';
 
-        $fmt = str_replace( '0y ', '', $fmt );
-        $fmt = str_replace( '0mo ', '', $fmt );
-        $fmt = str_replace( '0d ', '', $fmt );
-        $fmt = str_replace( '0h ', '', $fmt );
-        $fmt = str_replace( '0m ', '', $fmt );
+        if ( $years   !== 0 ) $fmt .= $years   . 'y ';
+        if ( $months  !== 0 ) $fmt .= $months  . 'mo ';
+        if ( $days    !== 0 ) $fmt .= $days    . 'd ';
+        if ( $hours   !== 0 ) $fmt .= $hours   . 'h ';
+        if ( $minutes !== 0 ) $fmt .= $minutes . 'm ';
+        if ( $seconds !== 0 ) $fmt .= $seconds . 's ';
 
-        return $fmt;
+        return trim( $fmt );
     }
 }
