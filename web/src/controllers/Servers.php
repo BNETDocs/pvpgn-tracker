@@ -12,10 +12,16 @@ class Servers extends Controller {
     public function &run( Router &$router, View &$view, array &$args ) {
         $model = new ServersModel();
 
-        $bntrackd = file_get_contents( Common::$config->tracker->state_file );
-        $bntrackd = json_decode( $bntrackd, true );
+        $state_file = Common::$config->tracker->state_file;
 
-        $model->servers = $bntrackd[ 'servers' ];
+        if ( file_exists( $state_file ) && is_readable( $state_file )) {
+            $bntrackd = file_get_contents( $state_file );
+            $bntrackd = json_decode( $bntrackd, true );
+
+            $model->servers = $bntrackd[ 'servers' ];
+        } else {
+            $model->servers = null;
+        }
 
         $view->render( $model );
 
