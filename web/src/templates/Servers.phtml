@@ -1,4 +1,4 @@
-<?php namespace PvPGNTracker\Templates; use PvPGNTracker\Libraries\UptimeConverter; ?>
+<?php namespace PvPGNTracker\Templates; use CarlBennett\MVC\Libraries\Common; use PvPGNTracker\Libraries\UptimeConverter; ?>
 <?php $title = 'Servers'; $nav = true; require( './header.inc.phtml' ); ?>
 
 <div class="container">
@@ -39,10 +39,20 @@
         } else {
           $url = null;
         }
+        $flag = '';
+        $location = $server[ 'location' ];
+        preg_match( '/^:([A-Z]{2})/', $location, $loc_match );
+        if ( isset( $loc_match[ 1 ])) { $flag = $loc_match[ 1 ]; $location = substr( $location, 3 ); }
+        $flag_img = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'static' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'flags' . DIRECTORY_SEPARATOR . strtolower( $flag ) . '.png';
+        if ( !file_exists( $flag_img )) { $flag = ''; }
+        if ( empty( $flag )) { $flag = geoip_country_code_by_name( $server[ 'ip_address' ]); }
+        if ( empty( $flag )) { $flag = 'pirate'; }
+        $flag = array( Common::relativeUrlToAbsolute( '/images/flags/' . strtolower( $flag ) . '.png' ), strtoupper( $flag ));
+        $location = trim( $location );
         ++$rows; ?>
     <tr>
       <td><address><?=$server[ 'ip_address' ]?>:<?=$server[ 'port' ]?></address></td>
-      <td><?=filter_var( $server[ 'location' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
+      <td><img style="height:1.25em;" src="<?=$flag[ 0 ]?>" alt="<?=$flag[ 1 ]?>" title="<?=$flag[ 1 ]?>"/> <?=filter_var( $location, FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
       <td><?=filter_var( $server[ 'description' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
       <td><a href="mailto:<?=filter_var( $server[ 'contact_email' ], FILTER_SANITIZE_EMAIL )?>"><?=filter_var( $server[ 'contact_name' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></a><br/><a href="<?=$url[ 0 ]?>"><?=$url[ 1 ]?></a></td>
       <td><?=(new UptimeConverter( $server[ 'uptime' ]))->__tostring()?></td>
