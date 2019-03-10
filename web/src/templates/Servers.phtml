@@ -47,9 +47,9 @@
       <td><a href="mailto:<?=filter_var( $server[ 'contact_email' ], FILTER_SANITIZE_EMAIL )?>"><?=filter_var( $server[ 'contact_name' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></a><br/><a href="<?=$url[ 0 ]?>"><?=$url[ 1 ]?></a></td>
       <td><?=(new UptimeConverter( $server[ 'uptime' ]))->__tostring()?></td>
       <td><?=filter_var( $server[ 'software' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?> (<?=filter_var( $server[ 'version' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?>)<br/><?=filter_var( $server[ 'platform' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
-      <td><?=$server[ 'active_users' ]?> active<br/><?=$server[ 'total_logins' ]?> logins</td>
-      <td><?=$server[ 'active_games' ]?> active<br/><?=$server[ 'total_games' ]?> total</td>
-      <td><?=$server[ 'active_channels' ]?></td>
+      <td><?=$server[ 'active_users' ]?>&nbsp;active, <?=$server[ 'total_logins' ]?>&nbsp;logins</td>
+      <td><?=$server[ 'active_games' ]?>&nbsp;active, <?=$server[ 'total_games' ]?>&nbsp;total</td>
+      <td><?=$server[ 'active_channels' ]?>&nbsp;active</td>
     </tr>
 <?php } ?>
 <?php if ( !$rows ) { ?>
