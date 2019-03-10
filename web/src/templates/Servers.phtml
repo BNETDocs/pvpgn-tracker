@@ -1,5 +1,5 @@
-<?php namespace PvPGNTracker\Templates; $title = 'Servers'; ?>
-<?php $nav = true; require( './header.inc.phtml' ); ?>
+<?php namespace PvPGNTracker\Templates; use PvPGNTracker\Libraries\UptimeConverter; ?>
+<?php $title = 'Servers'; $nav = true; require( './header.inc.phtml' ); ?>
 
 <div class="container">
 
@@ -19,19 +19,24 @@
       <th scope="col">Software</th>
       <th scope="col">Users</th>
       <th scope="col">Games</th>
+      <th scope="col">Channels</th>
     </tr>
   </thead>
   <tbody>
-<?php $rows = 0; foreach ( $this->getContext()->servers as $server ) { ++$rows; ?>
+<?php const TF_SHUTDOWN = 0x00000001; const TF_PRIVATE = 0x00000002; ?>
+<?php $rows = 0; foreach ( $this->getContext()->servers as $server ) {
+        if ( $server[ 'flags' ] & ( TF_SHUTDOWN | TF_PRIVATE ) >= ( TF_SHUTDOWN | TF_PRIVATE )) { continue; } // Delist these
+        ++$rows; ?>
     <tr>
-      <td><?=$server[ 'address' ]?></td>
-      <td><?=$server[ 'server_location' ]?></td>
-      <td><?=$server[ 'server_description' ]?></td>
-      <td><a href="mailto:<?=$server[ 'contact_email' ]?>"><?=$server[ 'contact_name' ]?></a></td>
-      <td><?=$server[ 'uptime' ]?></td>
-      <td><?=$server[ 'software' ]?></td>
-      <td><?=$server[ 'active_users' ]?></td>
-      <td><?=$server[ 'active_games' ]?></td>
+      <td><address><?=$server[ 'ip_address' ]?>:<?=$server[ 'port' ]?></address></td>
+      <td><?=filter_var( $server[ 'location' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
+      <td><?=filter_var( $server[ 'description' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
+      <td><a href="mailto:<?=filter_var( $server[ 'contact_email' ], FILTER_SANITIZE_EMAIL )?>"><?=filter_var( $server[ 'contact_name' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></a></td>
+      <td><?=(new UptimeConverter( $server[ 'uptime' ]))->__tostring()?></td>
+      <td><?=filter_var( $server[ 'software' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?> (<?=filter_var( $server[ 'version' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?>)<br/><?=filter_var( $server[ 'platform' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS )?></td>
+      <td><?=$server[ 'active_users' ]?> active<br/><?=$server[ 'total_logins' ]?> logins</td>
+      <td><?=$server[ 'active_games' ]?> active<br/><?=$server[ 'total_games' ]?> total</td>
+      <td><?=$server[ 'active_channels' ]?></td>
     </tr>
 <?php } ?>
 <?php if ( !$rows ) { ?>

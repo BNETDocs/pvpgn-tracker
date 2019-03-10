@@ -2,7 +2,6 @@
 
 namespace PvPGNTracker;
 
-use \CarlBennett\MVC\Libraries\Cache;
 use \CarlBennett\MVC\Libraries\Common;
 use \CarlBennett\MVC\Libraries\GlobalErrorHandler;
 use \CarlBennett\MVC\Libraries\Router;
@@ -25,14 +24,6 @@ function main() {
   ));
 
   VersionInfo::$version = VersionInfo::get();
-
-  Common::$cache = new Cache(
-    Common::$config->memcache->hostname . ':' . Common::$config->memcache->port,
-    Common::$config->memcache->connect_timeout,
-    Common::$config->memcache->tcp_nodelay
-  );
-
-  Common::$database = null;
 
   $router = new Router(
     'PvPGNTracker\\Controllers\\',
@@ -65,12 +56,6 @@ function main() {
     );
     $router->addRoute( // URL: /servers.json
       '#^/servers\.json$#', 'Servers', 'ServersJSON'
-    );
-    $router->addRoute( // URL: /solicit
-      '#^/solicit/?$#', 'RedirectSoft', 'RedirectSoftHtml', '/solicit.json'
-    );
-    $router->addRoute( // URL: /solicit.json
-      '#^/solicit\.json$#', 'Solicit', 'SolicitJSON'
     );
     $router->addRoute( // URL: /status
       '#^/status/?$#', 'RedirectSoft', 'RedirectSoftHtml', '/status.json'

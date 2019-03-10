@@ -8,6 +8,10 @@ body {
 body > .container {
   padding: 60px 15px 0;
 }
+address {
+  font-family: monospace;
+  font-size: smaller;
+}
 body > .footer {
   background-color: #f5f5f5;
   bottom: 0;
