@@ -1,12 +1,8 @@
 <?php namespace PvPGNTracker\Templates; use CarlBennett\MVC\Libraries\Common; use PvPGNTracker\Libraries\UptimeConverter; ?>
 <?php $title = 'Servers'; $nav = true; require( './header.inc.phtml' ); ?>
 
-<div class="container">
-
-  <h1><?=$title?></h1>
-  <p class="lead">These are the active servers that have been reporting in.</p>
-
-</div>
+<h1><?=$title?></h1>
+<p class="lead">These are the active servers that have been reporting in.</p>
 
 <table id="servers" class="table table-hover table-sm">
   <thead>
@@ -73,10 +69,10 @@
   </tbody>
 </table>
 
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('#servers').DataTable();
-    });
-  </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#servers').DataTable();
+  });
+</script>
 
 <?php require( './footer.inc.phtml' ); ?>
