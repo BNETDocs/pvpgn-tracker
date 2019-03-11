@@ -37,6 +37,7 @@
         "ext-geoip": "*",
         "ext-gmp": "*",
         "ext-http": "*",
+        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1c308e921e9d27ce614ad28dacd8ac4f",
-    "content-hash": "c1f79b6e1e429204b5e49c511074e1cf",
+    "hash": "dd3f4ca43021a14dd97f5b75f3ff3a04",
+    "content-hash": "f2b4a48baaefcb7b7874c62d4bca799c",
     "packages": [
         {
             "name": "carlbennett/php-mvc",
@@ -80,6 +80,7 @@
         "ext-geoip": "*",
         "ext-gmp": "*",
         "ext-http": "*",
+        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",
