@@ -123,12 +123,12 @@ class Servers extends Controller {
             $ip_address = $server[ 'ip_address' ];
             $location = $server[ 'location' ];
 
-            $flag = array( '', '' );
-
             preg_match( '/^:([A-Z]{2})/', $location, $custom_flag_match );
             if ( isset( $custom_flag_match[ 1 ])) {
                 $flag = $custom_flag_match[ 1 ];
                 $location = substr( $location, 3 );
+            } else {
+                $flag = '';
             }
 
             $flag_file = __DIR__ . '/../static' . self::FLAG_URL;
