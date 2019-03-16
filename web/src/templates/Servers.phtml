@@ -24,7 +24,11 @@
       <td><address><?=$server[ 'ip_address' ]?>:<?=$server[ 'port' ]?></address></td>
       <td><img style="height:1.25em;" src="<?=$server[ 'country_flag' ][ 0 ]?>" alt="<?=$server[ 'country_flag' ][ 1 ]?>" title="<?=$server[ 'country_flag' ][ 2 ]?>"/> <?=$server[ 'location' ]?></td>
       <td><?=$server[ 'description' ]?></td>
+<?php if ( !empty( $server[ 'contact_email' ])) { ?>
       <td><a href="mailto:<?=$server[ 'contact_email' ]?>"><?=$server[ 'contact_name' ]?></a><br/><a href="<?=$server[ 'url' ][ 0 ]?>"><?=$server[ 'url' ][ 1 ]?></a></td>
+<?php } else { ?>
+      <td><?=$server[ 'contact_name' ]?><br/><a href="<?=$server[ 'url' ][ 0 ]?>"><?=$server[ 'url' ][ 1 ]?></a></td>
+<?php } ?>
       <td><?=$server[ 'uptime' ]?></td>
       <td><?=$server[ 'software' ]?> (<?=$server[ 'version' ]?>) on <?=$server[ 'platform' ]?></td>
       <td><?=$server[ 'active_users' ]?>&nbsp;active, <?=$server[ 'total_logins' ]?>&nbsp;logins</td>
