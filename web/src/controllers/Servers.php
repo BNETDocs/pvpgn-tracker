@@ -64,8 +64,8 @@ class Servers extends Controller {
                 $server[ 'contact_email' ] = '';
             }
 
-            $server[ 'contact_email '] = filter_var(
-                $server[ 'contact_email '],
+            $server[ 'contact_email' ] = filter_var(
+                $server[ 'contact_email' ],
                 FILTER_SANITIZE_EMAIL, FILTER_FLAG_EMAIL_UNICODE
             );
 
