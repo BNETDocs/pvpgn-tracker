@@ -57,6 +57,19 @@ class Servers extends Controller {
             }
 
             // ---
+            // Validate contact email
+
+            if ( $server[ 'contact_email' ] == 'unknown' ) {
+                // this is the default value from PvPGN, instead use empty.
+                $server[ 'contact_email' ] = '';
+            }
+
+            $server[ 'contact_email '] = filter_var(
+                $server[ 'contact_email '],
+                FILTER_SANITIZE_EMAIL, FILTER_FLAG_EMAIL_UNICODE
+            );
+
+            // ---
             // Replace normal strings with html-safe strings:
 
             $server[ 'description' ] = self::filter_field(
