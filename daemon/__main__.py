@@ -48,7 +48,13 @@ def main():
 
 def load_state(filename):
     try:
-        with open(filename) as f:
+        if type(filename) is list:
+            print('filename given as list, choosing first item:', filename[0])
+            n = filename[0]
+        else:
+            n = filename
+
+        with open(n) as f:
             data = json.load(f)
 
     except IOError as e:
@@ -57,7 +63,13 @@ def load_state(filename):
     return data
 
 def save_state(filename, data):
-    with open(filename, 'w') as f:
+    if type(filename) is list:
+        print('filename given as list, choosing first item:', filename[0])
+        n = filename[0]
+    else:
+        n = filename
+
+    with open(n, 'w') as f:
         json.dump(data, f)
 
 def parse_datagram(data, addr):
