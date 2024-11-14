@@ -2,76 +2,51 @@
 
 namespace PvPGNTracker;
 
-use \CarlBennett\MVC\Libraries\Common;
-use \CarlBennett\MVC\Libraries\GlobalErrorHandler;
-use \CarlBennett\MVC\Libraries\Router;
+use \PvPGNTracker\Libraries\Config;
+use \PvPGNTracker\Libraries\Router;
 use \PvPGNTracker\Libraries\VersionInfo;
 
-function main() {
-
-  if ( !file_exists( __DIR__ . '/../lib/autoload.php' )) {
-    http_response_code( 500 );
-    exit( 'Server misconfigured. Please run `composer install`.' );
+function main()
+{
+  if (!file_exists( __DIR__ . '/../lib/autoload.php'))
+  {
+    http_response_code(500);
+    exit('Server misconfigured. Please run `composer install`.');
   }
-  require( __DIR__ . '/../lib/autoload.php' );
+  require(__DIR__ . '/../lib/autoload.php');
 
-  GlobalErrorHandler::createOverrides();
+  date_default_timezone_set('Etc/UTC');
 
-  date_default_timezone_set('UTC');
+  Config::load();
 
-  Common::$config = json_decode(file_get_contents(
-    __DIR__ . '/../etc/config.json'
-  ));
-
+  \PvPGNTracker\Libraries\ExceptionHandler::register();
   VersionInfo::$version = VersionInfo::get();
 
-  $router = new Router(
-    'PvPGNTracker\\Controllers\\',
-    'PvPGNTracker\\Views\\'
-  );
-
-  if ( Common::$config->maintenance->enable ) {
-    $router->addRoute( // URL: *
-      '#.*#', 'Maintenance', 'MaintenanceHtml',
-      Common::$config->maintenance->message
-    );
-  } else {
-    $router->addRoute( // URL: /
-      '#^/$#', 'RedirectSoft', 'RedirectSoftHtml', '/servers'
-    );
-    $router->addRoute( // URL: /search
-      '#^/search/?$#', 'Search', 'SearchHtml'
-    );
-    $router->addRoute( // URL: /server/:id.json
-      '#^/server/(\d+)/?.*\.json$#', 'Server\\View', 'Server\\ViewJSON'
-    );
-    $router->addRoute( // URL: /server/:id.txt
-      '#^/server/(\d+)/?.*\.txt$#', 'Server\\View', 'Server\\ViewPlain'
-    );
-    $router->addRoute( // URL: /server/:id
-      '#^/server/(\d+)/?#', 'Server\\View', 'Server\\ViewHtml'
-    );
-    $router->addRoute( // URL: /servers
-      '#^/servers/?$#', 'Servers', 'ServersHtml'
-    );
-    $router->addRoute( // URL: /servers.json
-      '#^/servers\.json$#', 'Servers', 'ServersJSON'
-    );
-    $router->addRoute( // URL: /status
-      '#^/status/?$#', 'RedirectSoft', 'RedirectSoftHtml', '/status.json'
-    );
-    $router->addRoute( // URL: /status.json
-      '#^/status\.json$#', 'Status', 'StatusJSON'
-    );
-    $router->addRoute( // URL: /status.txt
-      '#^/status\.txt$#', 'Status', 'StatusPlain'
-    );
-    $router->addRoute('#.*#', 'PageNotFound', 'PageNotFoundHtml'); // URL: *
+  if (Config::$root['maintenance']['enable'])
+  {
+    Router::$routes = [
+      ['#.*#', 'Maintenance', ['MaintenanceHtml'], Config::$root['maintenance']['message']],
+    ];
+  }
+  else
+  {
+    Router::$routes = [
+      ['#^/$#', 'RedirectSoft', ['RedirectSoftHtml'], '/servers'],
+      ['#^/search/?$#', 'Search', ['SearchHtml']],
+      ['#^/server/(\d+)/?.*\.html?$#', 'Server\\View', ['Server\\ViewHtml']],
+      ['#^/server/(\d+)/?.*\.json$#', 'Server\\View', ['Server\\ViewJson']],
+      ['#^/server/(\d+)/?.*\.txt$#', 'Server\\View', ['Server\\ViewPlain']],
+      ['#^/server/(\d+)/?#', 'Server\\View', ['Server\\ViewHtml', 'Server\\ViewJson', 'Server\\ViewPlain']],
+      ['#^/servers/?$#', 'Servers', ['ServersHtml']],
+      ['#^/servers\.json$#', 'Servers', ['ServersJson']],
+      ['#^/status/?$#', 'RedirectSoft', ['RedirectSoftHtml'], '/status.json'],
+      ['#^/status\.json$#', 'Status', ['StatusJson']],
+      ['#^/status\.txt$#', 'Status', ['StatusPlain']],
+    ];
+    Router::$route_not_found = ['PageNotFound', ['PageNotFoundHtml', 'PageNotFoundJson', 'PageNotFoundPlain']];
   }
 
-  $router->route();
-  $router->send();
-
+  Router::invoke();
 }
 
 main();

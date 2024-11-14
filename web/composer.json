@@ -1,5 +1,5 @@
 {
-    "name": "carlbennett/pvpgn-track",
+    "name": "bnetdocs/pvpgn-tracker",
     "description": "A PvPGN Tracker Suite",
     "type": "project",
     "keywords": [
@@ -11,7 +11,7 @@
         "starcraft",
         "warcraft"
     ],
-    "homepage": "https://github.com/BNETDocs/pvpgn-tracker-web",
+    "homepage": "https://github.com/BNETDocs/pvpgn-tracker",
     "license": "MIT",
     "authors": [
         {
@@ -24,15 +24,10 @@
     },
     "autoload": {
         "psr-4": {
-            "PvPGNTracker\\Controllers\\": "src/controllers",
-            "PvPGNTracker\\Libraries\\": "src/libraries",
-            "PvPGNTracker\\Models\\": "src/models",
-            "PvPGNTracker\\Templates\\": "src/templates",
-            "PvPGNTracker\\Views\\": "src/views"
+            "PvPGNTracker\\": "src/"
         }
     },
     "require": {
-        "carlbennett/php-mvc": "~2",
         "ext-curl": "*",
         "ext-geoip": "*",
         "ext-gmp": "*",
@@ -43,6 +38,7 @@
         "ext-mcrypt": "*",
         "ext-memcached": "*",
         "ext-pdo": "*",
-        "php-64bit": ">=5.5.0"
+        "geoip2/geoip2": "~2.0",
+        "php-64bit": "^8.1"
     }
 }
