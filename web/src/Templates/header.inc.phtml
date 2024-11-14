@@ -13,9 +13,6 @@ $nav_current = parse_url( getenv( 'REQUEST_URI' ), PHP_URL_PATH ); ?>
     <link rel="stylesheet" type="text/css" media="all" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/main.css"/>
-<?php foreach ( $this->additional_css as $path ) { ?>
-    <link rel="stylesheet" type="text/css" media="all" href="<?=Common::relativeUrlToAbsolute( $path )?>"/>
-<?php } ?>
 
     <meta name="keywords" content="pvpgn,tracker,track,telemetry,diablo,starcraft,warcraft"/>
 
