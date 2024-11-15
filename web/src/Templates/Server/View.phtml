@@ -1,12 +1,19 @@
 <?php
 namespace PvPGNTracker\Templates;
-$title = 'Servers';
 $nav = true;
-require('./Includes/header.inc.phtml');
-?>
+$solicitation = $this->getContext()->solicitation;
 
+if (!$solicitation) {
+  $title = 'Server Not Found';
+  require('./Includes/header.inc.phtml');
+  require('./Includes/NotFound.inc.phtml');
+} else {
+  $title = 'Server View';
+  $view_server_url = \PvPGNTracker\Libraries\UrlFormatter::format(sprintf('/server/%s:%d', $solicitation->server_address, $solicitation->server_port));
+  require('./Includes/header.inc.phtml');
+?>
 <h1><?=$title?></h1>
-<p class="lead">These are the active servers that have been reporting in.</p>
+<p class="lead">This server has been checking in recently.</p>
 
 <table id="servers" class="table table-hover table-sm">
   <thead>
@@ -24,9 +31,6 @@ require('./Includes/header.inc.phtml');
     </tr>
   </thead>
   <tbody>
-<?php $rows = 0; foreach ($this->getContext()->servers as $server) { ++$rows;
-    $solicitation = new \PvPGNTracker\Libraries\Solicitation($server);
-    $view_server_url = \PvPGNTracker\Libraries\UrlFormatter::format(sprintf('/server/%s:%d', $server['ip_address'], $server['port'])); ?>
     <tr>
       <td><a href="<?=$view_server_url?>.json" title="View Server as Json">⚙️</a> <a href="<?=$view_server_url?>.txt" title="View Server as Plaintext">🗒️</a> <a href="<?=$view_server_url?>" title="View Server as Webpage">🔎</a></td>
       <td><address><?=$solicitation->server_address?>:<?=$solicitation->server_port?></address></td>
@@ -43,14 +47,6 @@ require('./Includes/header.inc.phtml');
       <td><?=$solicitation->active_games?>&nbsp;active, <?=$solicitation->total_games?>&nbsp;total</td>
       <td><?=$solicitation->active_channels?>&nbsp;active</td>
     </tr>
-<?php } ?>
-<?php if ( !$rows ) { ?>
-    <tr>
-      <td scope="row" colspan="10"><em>(no servers reporting.)</em></td>
-    </tr>
-<?php } else { ?>
-    <tr><td colspan="10">Count: <?=$rows?></td></tr>
-<?php } ?>
   </tbody>
 </table>
 
@@ -60,4 +56,5 @@ require('./Includes/header.inc.phtml');
   });
 </script>
 
+<?php } ?>
 <?php require( './Includes/footer.inc.phtml' ); ?>

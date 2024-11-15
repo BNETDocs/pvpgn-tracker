@@ -1,9 +1,9 @@
 <?php namespace PvPGNTracker\Templates; $title = 'Maintenance'; ?>
-<?php $nav = false; require( './header.inc.phtml' ); ?>
+<?php $nav = false; require( './Includes/header.inc.phtml' ); ?>
 
 <div class="alert alert-danger" role="alert" style="margin-top:15px;">
   <h4 class="alert-heading"><?=$title?></h4>
   <p class="mb-0"><?=$this->getContext()->message?></p>
 </div>
 
-<?php require( './footer.inc.phtml' ); ?>
+<?php require( './Includes/footer.inc.phtml' ); ?>
