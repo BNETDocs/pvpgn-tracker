@@ -37,9 +37,9 @@ if (!$solicitation) {
       <td><img style="height:1.25em;" src="<?=$solicitation->country_flag[0]?>" alt="<?=$solicitation->country_flag[1]?>" title="<?=$solicitation->country_flag[2]?>"/> <?=$solicitation->server_location?></td>
       <td><?=$solicitation->server_description?></td>
 <?php if (!empty($solicitation->contact_email)) { ?>
-      <td><a href="mailto:<?=$solicitation->contact_email?>"><?=$solicitation->contact_name?></a><br/><a href="<?=$solicitation->url[0]?>"><?=$solicitation->url[1]?></a></td>
+      <td><a href="mailto:<?=$solicitation->contact_email?>"><?=$solicitation->contact_name?></a><br/><a href="<?=$solicitation->server_url[0]?>"><?=$solicitation->server_url[1]?></a></td>
 <?php } else { ?>
-      <td><?=$solicitation->contact_name?><br/><a href="<?=$solicitation->url[0]?>"><?=$solicitation->url[1]?></a></td>
+      <td><?=$solicitation->contact_name?><br/><a href="<?=$solicitation->server_url[0]?>"><?=$solicitation->server_url[1]?></a></td>
 <?php } ?>
       <td><?=$solicitation->uptime?></td>
       <td><?=$solicitation->software?> (<?=$solicitation->version?>) on <?=$solicitation->platform?></td>
